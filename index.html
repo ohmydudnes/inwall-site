@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ИНВОЛ.Ремонт и дизайн</title>
+  <!-- 🎨 ИДЕАЛЬНЫЙ СОВРЕМЕННЫЙ ЯРЛЫК ВКЛАДКИ ИЗ ТВОЕГО PNG-РИСУНКА -->
+  <link rel="icon" type="image/png" href="icon.png" sizes="32x32">
+
+
+  <link rel="stylesheet" href="./css/style.css?v=3">
+  <style>
+    /* 💻 Настройки для больших экранов (Компьютеры и ноутбуки) */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-text-block {
+      display: flex;
+      flex-direction: column;
+      height: 48px; /* Жёстко держим высоту под размер иконки (64px с учётом отступов) */
+      justify-content: space-between;
+    }
+
+    .logo-title {
+      font-size: 24px; /* Фиксированный строгий размер на ПК */
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+
+    .logo-sub {
+      font-size: 13px; /* Фиксированный строгий размер на ПК */
+      line-height: 1;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    /* 📱 Настройки для смартфонов (Экран меньше 768px) */
+    @media (max-width: 768px) {
+      .logo-container {
+        gap: 10px;
+      }
+
+      .logo-text-block {
+        height: auto; /* Убираем фиксацию высоты, чтобы текст не зажимался */
+        justify-content: center;
+        gap: 2px;
+      }
+
+      .logo-title {
+        font-size: 16px !important; /* Идеальный симметричный размер на телефоне */
+        line-height: 1.1;
+      }
+
+      .logo-sub {
+        font-size: 10px !important; /* Уменьшаем подзаголовок, чтобы он не уползал */
+        line-height: 1.2;
+        white-space: normal; /* Разрешаем перенос на новую строку */
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+<div id="top-header" class="header-container">
+  <div class="header-bg-image"></div>
+  <div class="header-overlay"></div>
+
+  <div class="header-content-wrapper">
+    <!-- Шапка с интерактивным календарем слотов -->
+    <header class="top-bar">
+
+      <!-- 🔥 КРИСТАЛЬНО ЧИСТЫЙ И СИММЕТРИЧНЫЙ CRM-ЛОГОТИП -->
+      <div class="logo-container">
+        <!-- Графический знак: на ПК равен 64px, на телефонах плавно ужмется за счет стилей темы -->
+        <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://w3.org"
+             style="opacity: 0.95; flex-shrink: 0;">
+          <defs>
+            <linearGradient id="neon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+          <path d="M10 45L50 15L90 45" stroke="#ffffff" stroke-width="6" stroke-linecap="round"
+                stroke-linejoin="round"/>
+          <path d="M12 45H88" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+          <rect x="7" y="54" width="86" height="34" rx="4" fill="url(#neon-gradient)"
+                style="filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.4));"/>
+        </svg>
+
+        <!-- Текстовый блок с авто-выравниванием -->
+        <div class="logo-text-block">
+          <span class="logo-title">ИНВОЛ.РЕМОНТ И ДИЗАЙН</span>
+          <span class="logo-sub">Инженерные решения, отделочные работы, дизайн проекты</span>
+        </div>
+      </div>
+
+
+      <div class="calendar-wrapper-top">
+        <span class="phone">Санкт-Петербург и Ленобласть</span>
+
+        <!-- Кнопка-ссылка для открытия календаря -->
+        <button id="calendar-toggle-btn" class="calendar-trigger-text">
+          <span class="pulse-green-dot"></span> Выбрать дату замера
+        </button>
+
+        <!-- Выпадающее окно календаря. УПРАВЛЯЙ ДАТАМИ ЗДЕСЬ (вписаны через запятую в data-green и data-red) -->
+        <div id="dropdown-calendar" class="calendar-dropdown-box" data-green="" data-red="">
+
+          <!-- 🕹️ ШАПКА КАЛЕНДАРЯ С ОБЪЁМНЫМИ СТРЕЛОЧКАМИ И ТЕНЯМИ -->
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #e2e8f0; margin-bottom: 8px;">
+            <button id="prev-month-btn"
+                    style="background: none; border: none; color: #0f172a; font-weight: bold; cursor: pointer; padding: 4px 12px; font-size: 20px; opacity: 0.5; filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.15)); transition: all 0.2s; user-select: none;"
+                    onmouseenter="this.style.opacity=1; this.style.transform='scale(1.15)'"
+                    onmouseleave="this.style.opacity=0.5; this.style.transform='scale(1)'">&lt;
+            </button>
+            <span class="calendar-month-name"
+                  style="font-weight: 800; color: #0f172a; font-size: 14px; letter-spacing: 0.8px; text-transform: uppercase; user-select: none;">Сентябрь 2026</span>
+            <button id="next-month-btn"
+                    style="background: none; border: none; color: #0f172a; font-weight: bold; cursor: pointer; padding: 4px 12px; font-size: 20px; opacity: 0.5; filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.15)); transition: all 0.2s; user-select: none;"
+                    onmouseenter="this.style.opacity=1; this.style.transform='scale(1.15)'"
+                    onmouseleave="this.style.opacity=0.5; this.style.transform='scale(1)'">&gt;
+            </button>
+          </div>
+
+
+          <div class="calendar-week-days">
+            <div>Пн</div>
+            <div>Вт</div>
+            <div>Ср</div>
+            <div>Чт</div>
+            <div>Пт</div>
+            <div class="weekend-head">Сб</div>
+            <div class="weekend-head">Вс</div>
+          </div>
+          <!-- Дни месяца сгенерируются скриптом автоматически -->
+          <div id="calendar-days-grid" class="calendar-days-grid"></div>
+          <div class="calendar-legend">
+            <span class="legend-item"><span class="leg-dot green"></span> Свободно</span>
+            <span class="legend-item"><span class="leg-dot red"></span> Занято</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- Центральный контент -->
+    <div class="main-content">
+      <h1>Современный <br>качественный ремонт <br>в вашей квартире <br><span class="silver-text">«под ключ»</span></h1>
+
+      <p style="color: #cbd5e1; font-size: 14px; line-height: 1.5; margin-bottom: 24px; position: relative; top: 15px;">
+        Нужен частичный ремонт или отдельный вид работ?<br>
+        Выберите опцию <b>"Бесплатный замер"</b> — зафиксируем смету до старта, дадим честную гарантию.
+      </p>
+
+
+      <div class="configurator-wrapper">
+        <div class="options-row">
+          <button id="zamer-btn" class="btn-outline">
+            <span class="check-mark">✓</span> Бесплатный замер
+          </button>
+          <button id="project-btn" class="btn-outline">
+            <span class="check-mark">✓</span> Хочу проект
+          </button>
+          <button id="visual-btn" class="btn-outline">
+            <span class="check-mark">✓</span> Хочу визуализацию
+          </button>
+        </div>
+        <div class="action-row">
+          <a href="javascript:void(0);" id="cta-btn" class="btn-gold"
+             onclick="document.getElementById('quiz').scrollIntoView({behavior: 'smooth'});">Рассчитать стоимость</a>
+        </div>
+      </div>
+
+      <div class="badge-wrapper">
+        <div id="interactive-badge" class="badge">
+          Осуществить мечту
+        </div>
+      </div>
+    </div>
+
+    <!-- ПАНЕЛЬ ПРЕИМУЩЕСТВ -->
+    <div class="bottom-bar">
+      <div class="grid">
+        <div><p class="stat-num">Подход</p>
+          <p class="stat-text">Честное отношение к делу</p></div>
+        <div><p class="stat-num">Материалы</p>
+          <p class="stat-text">Подберем под Ваш бюджет</p></div>
+        <div><p class="stat-num">Логистика</p>
+          <p class="stat-text">Опция закупки и доставки материалов</p></div>
+        <div><p class="stat-num">Всё в одном</p>
+          <p class="stat-text">Полное сопровождение объекта</p></div>
+        <div><p class="stat-num">Смета</p>
+          <p class="stat-text">Подробный и прозрачный расчет работ</p></div>
+        <div><p class="stat-num">Дизайн</p>
+          <p class="stat-text">Работа с профессиональными авторами</p></div>
+        <div><p class="stat-num">Бренды</p>
+          <p class="stat-text">Скидки от поставщиков</p></div>
+        <div><p class="stat-num">Опыт</p>
+          <p class="stat-text">10 лет доверия клиентов</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- РОСКОШНАЯ СТАТИЧНАЯ ГАЛЕРЕЯ РАБОТ IN-WALL -->
+<section id="portfolio" class="portfolio-section">
+  <div class="portfolio-container">
+    <h2 class="section-title">Примеры наших работ в СПб</h2>
+    <p class="section-subtitle">Готовые этапы скрытого инженерного монтажа и чистовой отделки</p>
+
+    <div class="portfolio-grid-gallery">
+      <!-- Кадр 1 -->
+      <div class="gallery-item">
+        <img src="./img/portfolio/1.jpg" alt="Электромонтаж">
+        <div class="gallery-desc">Плиточные работы • Монтаж чистовой сантехники</div>
+      </div>
+      <!-- Кадр 2 -->
+      <div class="gallery-item">
+        <img src="./img/portfolio/2.jpg" alt="Натяжной потолок">
+        <div class="gallery-desc">Надежный и понятный электромонтаж • установка розеток и выключателей</div>
+      </div>
+      <!-- Кадр 3 -->
+      <div class="gallery-item">
+        <img src="./img/portfolio/3.jpg" alt="Инженерная сантехника">
+        <div class="gallery-desc">Интересные идеи • лаконичный дизайн</div>
+      </div>
+      <!-- Кадр 4 -->
+      <div class="gallery-item">
+        <img src="./img/portfolio/4.jpg" alt="Чистовая отделка">
+        <div class="gallery-desc">Натяжные потолки • Фабричное производство</div>
+      </div>
+    </div>
+
+    <!-- Единая кнопка действия под галереей -->
+    <div style="margin-top: 50px;">
+      <button class="btn-card" style="max-width: 340px; margin: 0 auto;" onclick="scrollToTopAndOpenCalendar()">
+        Записаться на замер
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- 🎰 ЗЕРКАЛЬНЫЙ ПРЕМИУМ КВИЗ: ИДЕАЛЬНАЯ СИММЕТРИЯ ФЛАНГОВ (240x200px)-->
+<!-- ================================================================= -->
+<section id="quiz" class="quiz-section">
+  <div class="quiz-flexible-wrapper"
+       style="display: flex; justify-content: center; align-items: flex-start; gap: 35px; max-width: 1440px; margin: 0 auto; padding: 0 15px;">
+
+    <!-- ========================================================= -->
+    <!-- 🪧 ЛЕВАЯ КОЛОННА БАННЕРОВ (ВЫРАВНЕННАЯ ПО ВЫСОТЕ)          -->
+    <!-- ========================================================= -->
+    <div class="side-banner-column column-left"
+         style="display: flex; flex-direction: column; gap: 20px; width: 240px; position: sticky; top: 30px;">
+
+      <!-- ЛЕВЫЙ БАННЕР №1 -->
+      <div class="side-banner"
+           style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(226, 232, 240, 0.08); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;">
+        <span style="display: block; font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">🔥 Горячая Акция</span>
+
+        <!-- 🔔 ИНСТРУКЦИЯ ДЛЯ ЗАМЕНЫ НА МЕДИАФАЙЛ (КАРТИНКУ):
+             Если нужно вставить картинку вместо текста ниже, ПОЛНОСТЬЮ сотри блок <div style="...">...</div>
+             и вместо него напиши: <img src="img/твоя_акция.png" style="width: 100%; height: auto; border-radius: 8px; max-height: 140px; object-fit: cover;"> -->
+        <div
+          style="background-color: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; border-radius: 8px; padding: 15px 10px; color: #10b981; font-weight: 700; font-size: 13px; line-height: 1.4; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 5px;">
+          🎁 БЕСПЛАТНЫЙ ЗАМЕР<br><span
+          style="font-size: 11px; color: #94a3b8; font-weight: 400; display: block; margin-top: 5px;">При бронировании даты до конца недели! Спешите занять слот.</span>
+        </div>
+      </div>
+
+      <!-- ЛЕВЫЙ БАННЕР №2 -->
+      <div class="side-banner"
+           style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(226, 232, 240, 0.08); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;">
+        <span style="display: block; font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">Партнёры проекта</span>
+
+        <!-- 🔔 ИНСТРУКЦИЯ ДЛЯ ЗАМЕНЫ НА МЕДИАФАЙЛ (РЕКЛАМУ ПАРТНЕРА):
+             Удали блок <div style="...">...</div> ниже и вставь баннер:
+             <img src="img/partner_logo.png" style="width: 100%; height: auto; border-radius: 8px; max-height: 140px; object-fit: cover;"> -->
+        <div
+          style="background-color: rgba(226, 232, 240, 0.03); border: 1px dashed rgba(226, 232, 240, 0.15); border-radius: 8px; padding: 15px 10px; color: #94a3b8; font-size: 12px; line-height: 1.4; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 5px;">
+          📐 Дизайн-проект<br><span
+          style="font-size: 11px; color: #64748b; font-weight: 400; display: block; margin-top: 5px;">Скидка 10% на интерьерные решения от наших официальных дизайнеров.</span>
+        </div>
+      </div>
+
+      <!-- ЛЕВЫЙ БАННЕР №3 -->
+      <div class="side-banner"
+           style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(226, 232, 240, 0.08); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;">
+        <span style="display: block; font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">IN-WALL Гарантия</span>
+        <div
+          style="background-color: rgba(59, 130, 246, 0.05); border: 1px dashed rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 15px 10px; color: #60a5fa; font-weight: 600; font-size: 12px; line-height: 1.4; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 5px;">
+          🔒 ФИКСИРОВАННАЯ СМЕТА<br><span
+          style="font-size: 11px; color: #94a3b8; font-weight: 400; display: block; margin-top: 5px;">Стоимость ремонта прописывается до начала работ и не растет в процессе!</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 📝 ЦЕНТРАЛЬНЫЙ БЛОК КВИЗ-ФОРМЫ             -->
+    <!-- ========================================== -->
+    <div class="quiz-container" style="flex: 1; max-width: 650px; margin: 0;">
+      <h2 class="quiz-title">Рассчитайте стоимость ремонта</h2>
+      <p class="quiz-subtitle">Ответьте на 3 простых вопроса, чтобы узнать предварительную смету</p>
+
+      <form id="quiz-form">
+        <div class="form-group">
+          <label class="form-label" for="space">1. Укажите примерную площадь квартиры (кв. м.):</label>
+          <input type="number" id="space" name="space" class="input-field" placeholder="Например: 45" required min="10"
+                 max="500">
+        </div>
+
+        <!-- ШАГ 2: ФОРМАТ РЕМОНТА -->
+        <div class="form-group">
+          <label class="form-label" for="house-type">2. Что планируется отремонтировать:</label>
+          <select id="house-type" name="house-type" class="select-field" onchange="togglePartialServicesBlock()">
+            <option value="monolit">Комплексный ремонт: Новостройка</option>
+            <option value="brick">Комплексный ремонт: Вторичное жилье</option>
+            <option value="partial">Частичный ремонт / Отдельный вид работ</option>
+          </select>
+        </div>
+
+        <!-- ДИНАМИЧЕСКИЙ БЛОК ЧАСТИЧНОГО РЕМОНТА -->
+        <div class="form-group" id="partial-services-wrapper"
+             style="display: none; margin-top: 15px; animation: fadeIn 0.3s ease;">
+          <label class="form-label" for="partial-service" style="color: #10b981;">🛠️ Выберите вид отделочных или
+            инженерных работ:</label>
+          <select id="partial-service" name="partial-service" class="select-field"
+                  style="border-color: #10b981; background-color: #f8fafc;">
+            <option value="electro">Качественный электромонтаж</option>
+            <option value="san">Чистовая и инженерная сантехника</option>
+            <option value="otdelka">Комплексные отделочные работы</option>
+            <option value="plitka">Плиточные работы (Керамогранит)</option>
+            <option value="ceil">Натяжные потолки фабричного качества</option>
+          </select>
+        </div>
+        <!-- ШАГ 3: ЖЕЛАЕМЫЙ СТИЛЬ ИНТЕРЬЕРА -->
+        <div class="form-group" style="margin-top: 20px;">
+          <label class="form-label" for="style">3. Желаемый стиль интерьера:</label>
+          <select id="style" name="style" class="select-field">
+            <option value="modern">Современный (Минимализм / Сканди)</option>
+            <option value="design">Дизайнерский по проекту</option>
+            <option value="classic">Классический стиль</option>
+            <option value="none">Пока не определился</option>
+          </select>
+        </div>
+
+        <!-- ВЫБРАННАЯ ДАТА ЗАМЕРА -->
+        <div class="form-group"
+             style="background-color: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid #e2e8f0; margin-top: 20px;">
+          <div
+            style="font-size: 14px; font-weight: 700; color: #475569; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+            <span>📅 Выбранная дата замера:</span>
+            <span id="quiz-selected-date" class="quiz-date-red" style="cursor: pointer;"
+                  onclick="scrollToTopAndOpenCalendar()">Не выбрана (выберите в шапке сайта)</span>
+          </div>
+        </div>
+
+        <!-- ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ -->
+        <div class="form-group"
+             style="background-color: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid #e2e8f0; margin-top: 12px;">
+          <div
+            style="font-size: 14px; font-weight: 700; color: #475569; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+            <span>📋 Включено в смету:</span>
+            <span id="quiz-selected-services" style="color: #0f172a; font-weight: 800;">Только ремонт под ключ</span>
+          </div>
+        </div>
+
+        <!-- ПОЛЕ ВВОДА ИМЕНИ КЛИЕНТА -->
+        <div class="quiz-input-wrapper" style="margin-bottom: 15px;">
+          <input type="text" id="name-input" placeholder="Введите ваше имя" required
+                 style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px;">
+        </div>
+
+        <!-- ПОЛЕ ВВОДА ТЕЛЕФОНА -->
+        <div class="form-group" style="margin-top: 40px;">
+          <label class="form-label" for="phone-input">Куда прислать расчет стоимости?</label>
+          <input type="tel" id="phone-input" name="phone" class="input-field" placeholder="+7 (___) ___-__-__" required
+                 style="text-align: center; font-size: 18px; font-weight: bold;">
+        </div>
+
+        <div class="quiz-submit">
+          <button type="submit" class="btn-submit">Получить расчет стоимости 📊</button>
+        </div>
+      </form>
+
+      <!-- 📱 СПЕЦИАЛЬНЫЙ ГОРИЗОНТАЛЬНЫЙ БАННЕР ДЛЯ МОБИЛЬНЫХ (ПОЯВЛЯЕТСЯ ТОЛЬКО НА СМАРТФОНАХ) -->
+      <div class="mobile-only-banner" style="display: none; margin-top: 25px; background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(226, 232, 240, 0.08); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+        <span style="display: block; font-size: 10px; color: #10b981; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 700;">🔥 Акция IN-WALL</span>
+        <div style="color: #ffffff; font-weight: 700; font-size: 14px; line-height: 1.4;">
+          🎁 БЕСПЛАТНЫЙ ЗАМЕР КВАРТИРЫ В СПБ
+        </div>
+        <p style="color: #94a3b8; font-size: 11px; margin: 5px 0 0 0;">При бронировании даты через Квиз до конца недели!</p>
+      </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 🪧 ПРАВАЯ КОЛОННА ИНТЕРАКТИВНЫХ КЛИКАБЕЛЬНЫХ БАННЕРОВ       -->
+    <!-- ========================================================= -->
+    <div class="side-banner-column column-right"
+         style="display: flex; flex-direction: column; gap: 20px; width: 240px; position: sticky; top: 30px;">
+
+      <!-- 🔗 ПРАВЫЙ БАННЕР №1 (КЛИКАБЕЛЬНЫЙ) -->
+      <!-- ПОДСКАЗКА: Вместо '#' внутри href="..." вставь реальную ссылку на сайт рекламодателя (например: https://kuhni.ru) -->
+      <a href="#" target="_blank" class="side-banner"
+         style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(226, 232, 240, 0.08); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; transition: transform 0.2s, border-color 0.2s;"
+         onmouseenter="this.style.transform='scale(1.02)'; this.style.borderColor='#8b5cf6';"
+         onmouseleave="this.style.transform='scale(1)'; this.style.borderColor='rgba(226, 232, 240, 0.08)';">
+        <span
+          style="display: block; font-size: 11px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">🔗 Место свободно</span>
+
+        <!-- ПОДСКАЗКА ДЛЯ РЕКЛАМОДАТЕЛЕЙ: Если вставляешь картинку, сотри блок <div style="...">...</div> ниже и напиши: <img src="img/banner1.png" style="width:100%; height:auto; border-radius:8px; max-height:140px; object-fit:cover;"> -->
+        <div
+          style="background-color: rgba(139, 92, 246, 0.04); border: 1px dashed rgba(139, 92, 246, 0.25); border-radius: 8px; padding: 15px 10px; color: #94a3b8; font-size: 12px; line-height: 1.4; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 5px;">
+          ✨ Реклама IN-WALL<br><span style="font-size: 11px; color: #64748b; display: block; margin-top: 5px;">Кликабельное коммерческое место. По вопросам размещения напишите нам в футере.</span>
+        </div>
+      </a>
+
+      <!-- 🔗 ПРАВЫЙ БАННЕР №2 (КЛИКАБЕЛЬНЫЙ) -->
+      <a href="#" target="_blank" class="side-banner"
+         style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(226, 232, 240, 0.08); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; transition: transform 0.2s, border-color 0.2s;"
+         onmouseenter="this.style.transform='scale(1.02)'; this.style.borderColor='#8b5cf6';"
+         onmouseleave="this.style.transform='scale(1)'; this.style.borderColor='rgba(226, 232, 240, 0.08)';">
+        <span
+          style="display: block; font-size: 11px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">🔗 Место свободно</span>
+        <div
+          style="background-color: rgba(139, 92, 246, 0.04); border: 1px dashed rgba(139, 92, 246, 0.25); border-radius: 8px; padding: 15px 10px; color: #94a3b8; font-size: 12px; line-height: 1.4; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 5px;">
+          ✨ Реклама IN-WALL<br><span style="font-size: 11px; color: #64748b; display: block; margin-top: 5px;">Идеальная площадка под интеграцию строительных брендов, кухонь или чистовых материалов в СПб.</span>
+        </div>
+      </a>
+
+      <!-- 🔗 ПРАВЫЙ БАННЕР №3 (КЛИКАБЕЛЬНЫЙ) -->
+      <a href="#" target="_blank" class="side-banner"
+         style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(226, 232, 240, 0.08); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; transition: transform 0.2s, border-color 0.2s;"
+         onmouseenter="this.style.transform='scale(1.02)'; this.style.borderColor='#8b5cf6';"
+         onmouseleave="this.style.transform='scale(1)'; this.style.borderColor='rgba(226, 232, 240, 0.08)';">
+        <span
+          style="display: block; font-size: 11px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">🔗 Место свободно</span>
+        <div
+          style="background-color: rgba(139, 92, 246, 0.04); border: 1px dashed rgba(139, 92, 246, 0.25); border-radius: 8px; padding: 15px 10px; color: #94a3b8; font-size: 12px; line-height: 1.4; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 5px;">
+          ✨ Реклама IN-WALL<br><span style="font-size: 11px; color: #64748b; display: block; margin-top: 5px;">Ваш баннер увидят сотни горячих заказчиков из новостроек Санкт-Петербурга ежедневно.</span>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================= -->
+<!-- 🔥 МОНОЛИТНАЯ ИНТЕРАКТИВНАЯ СИСТЕМА IN-WALL: КВИЗ + CRM КАЛЕНДАРЬ -->
+<!-- ================================================================= -->
+<script>
+  // =================================================================
+  // 🔑 1. НАСТРОЙКИ СВЯЗИ С БАЗОЙ ДАННЫХ FIREBASE (ЗАЩИЩЕННАЯ СКЛЕЙКА)
+  // =================================================================
+  const jsPart1 = "inwall-calendar-default-rtdb";
+  const jsPart2 = ".europe-west1.firebasedatabase.app";
+  const FIREBASE_ROOT_URL = "https://inwall-calendar-default-rtdb.europe-west1.firebasedatabase.app";
+
+  // Глобальные элементы календаря
+  const calendarBox = document.getElementById('dropdown-calendar');
+  const quizDateDisplay = document.getElementById('quiz-selected-date');
+  const gridContainer = document.getElementById('calendar-days-grid');
+
+  const monthNames = [
+    "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+  ];
+  const monthGenitive = [
+    "января", "февраля", "марта", "апреля", "мая", "июня",
+    "июля", "августа", "сентября", "октября", "ноября", "декабря"
+  ];
+
+  // 🧠 Глобальные переменные двухмесячной навигации
+  const realCurrentDate = new Date();
+  let displayedMonthIndex = realCurrentDate.getMonth();
+  let displayedYear = realCurrentDate.getFullYear();
+
+  // Функция-переключатель видимости скрытого блока частичных работ
+  window.togglePartialServicesBlock = function () {
+    const formatSelect = document.getElementById('house-type');
+    const partialWrapper = document.getElementById('partial-services-wrapper');
+    if (formatSelect && partialWrapper) {
+      if (formatSelect.value === 'partial') {
+        partialWrapper.style.display = 'block';
+      } else {
+        partialWrapper.style.display = 'none';
+      }
+    }
+  }
+
+  // Функции управления юридическим окном
+  window.openPolicyModal = function () {
+    const modal = document.getElementById('policy-modal');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  window.closePolicyModal = function () {
+    const modal = document.getElementById('policy-modal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  // =================================================================
+  // 🔄 2. ВЕЧНЫЙ ДВУХМЕСЯЧНЫЙ CRM-МОНОЛИТ СИНХРОНИЗАЦИИ КАЛЕНДАРЯ
+  // =================================================================
+  function syncAndRenderCalendar() {
+    const monthSuffix = "_" + (displayedMonthIndex + 1);
+
+    Promise.all([
+      fetch(FIREBASE_ROOT_URL + "/red_days" + monthSuffix + ".json").then(r => r.json().catch(() => null)),
+      fetch(FIREBASE_ROOT_URL + "/green_days" + monthSuffix + ".json").then(r => r.json().catch(() => null))
+    ])
+      .then(([redData, greenData]) => {
+        const activeRedDays = redData ? Object.values(redData).map(String) : [];
+        const activeGreenDays = greenData ? Object.values(greenData).map(String) : [];
+
+        if (calendarBox) {
+          calendarBox.setAttribute('data-red', activeRedDays.join(','));
+          calendarBox.setAttribute('data-green', activeGreenDays.join(','));
+          calendarBox.querySelector('.calendar-month-name').textContent = `${monthNames[displayedMonthIndex]} ${displayedYear}`;
+        }
+
+        if (gridContainer) {
+          gridContainer.innerHTML = '';
+
+          let startDayOfWeek = new Date(displayedYear, displayedMonthIndex, 1).getDay();
+          if (startDayOfWeek === 0) startDayOfWeek = 7;
+
+          for (let i = 1; i < startDayOfWeek; i++) {
+            const emptyCell = document.createElement('div');
+            gridContainer.appendChild(emptyCell);
+          }
+
+          const daysInMonth = new Date(displayedYear, displayedMonthIndex + 1, 0).getDate();
+
+          for (let day = 1; day <= daysInMonth; day++) {
+            const dayCell = document.createElement('div');
+            dayCell.textContent = String(day);
+            dayCell.classList.add('calendar-day-cell');
+
+            const dayStr = String(day);
+
+            if (activeRedDays.includes(dayStr)) {
+              dayCell.classList.add('day-red');
+              dayCell.style.backgroundColor = '#ef4444';
+              dayCell.style.color = '#ffffff';
+              dayCell.style.borderRadius = '50%';
+              dayCell.style.opacity = '0.4';
+              dayCell.style.cursor = 'not-allowed';
+            } else if (activeGreenDays.includes(dayStr)) {
+              dayCell.classList.add('day-green');
+              dayCell.style.backgroundColor = '#22c55e';
+              dayCell.style.color = '#ffffff';
+              dayCell.style.borderRadius = '50%';
+              dayCell.style.cursor = 'pointer';
+
+              dayCell.addEventListener('click', () => {
+                quizDateDisplay.textContent = `${day} ${monthGenitive[displayedMonthIndex]} ${displayedYear} г.`;
+                quizDateDisplay.classList.remove('quiz-date-red');
+                quizDateDisplay.classList.add('quiz-date-green');
+                quizDateDisplay.parentElement.parentElement.style.borderColor = '#10b981';
+                calendarBox.classList.remove('open');
+              });
+            } else {
+              dayCell.style.opacity = '0.3';
+              dayCell.style.cursor = 'not-allowed';
+            }
+
+            gridContainer.appendChild(dayCell);
+          }
+        }
+      })
+      .catch(error => console.error("Ошибка двухмесячного CRM-моста:", error));
+  }
+
+  const prevMonthBtn = document.getElementById('prev-month-btn');
+  const nextMonthBtn = document.getElementById('next-month-btn');
+
+  if (prevMonthBtn) {
+    prevMonthBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (displayedMonthIndex === realCurrentDate.getMonth()) return;
+      displayedMonthIndex = realCurrentDate.getMonth();
+      displayedYear = realCurrentDate.getFullYear();
+      syncAndRenderCalendar();
+    });
+  }
+
+  if (nextMonthBtn) {
+    nextMonthBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (displayedMonthIndex === (realCurrentDate.getMonth() + 1) % 12) return;
+      displayedMonthIndex = (realCurrentDate.getMonth() + 1) % 12;
+      if (displayedMonthIndex === 0) displayedYear++;
+      syncAndRenderCalendar();
+    });
+  }
+
+  const toggleBtn = document.getElementById('calendar-toggle-btn');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      calendarBox.classList.toggle('open');
+    });
+  }
+  document.addEventListener('click', () => {
+    if (calendarBox) calendarBox.classList.remove('open');
+  });
+  if (calendarBox) {
+    calendarBox.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+
+  // =================================================================
+  // 💻 3. ОБРАБОТКА ИНТЕРАКТИВНЫХ КНОПОК ПЕРВОГО ЭКРАНА И ДОП. УСЛУГ
+  // =================================================================
+  const ctaBtn = document.getElementById('cta-btn');
+  const badge = document.getElementById('interactive-badge');
+  const zamerBtn = document.getElementById('zamer-btn');
+  const projectBtn = document.getElementById('project-btn');
+  const visualBtn = document.getElementById('visual-btn');
+
+  if (ctaBtn && badge) {
+    ctaBtn.addEventListener('mouseenter', () => {
+      badge.classList.add('badge-active');
+    });
+    ctaBtn.addEventListener('mouseleave', () => {
+      badge.classList.remove('badge-active');
+    });
+  }
+
+  function updateQuizServices() {
+    const servicesDisplay = document.getElementById('quiz-selected-services');
+    if (!servicesDisplay) return;
+
+    let selected = [];
+    if (zamerBtn && zamerBtn.classList.contains('btn-green-active')) selected.push('Бесплатный замер');
+    if (projectBtn && projectBtn.classList.contains('btn-green-active')) selected.push('Проект');
+    if (visualBtn && visualBtn.classList.contains('btn-green-active')) selected.push('Визуализация');
+
+    if (selected.length > 0) {
+      servicesDisplay.textContent = selected.join(', ');
+      servicesDisplay.style.color = '#059669';
+    } else {
+      servicesDisplay.textContent = 'Только ремонт под ключ';
+      servicesDisplay.style.color = '#0f172a';
+    }
+  }
+
+  if (zamerBtn) zamerBtn.addEventListener('click', () => {
+    zamerBtn.classList.toggle('btn-green-active');
+    updateQuizServices();
+  });
+  if (projectBtn) projectBtn.addEventListener('click', () => {
+    projectBtn.classList.toggle('btn-green-active');
+    updateQuizServices();
+  });
+  if (visualBtn) visualBtn.addEventListener('click', () => {
+    visualBtn.classList.toggle('btn-green-active');
+    updateQuizServices();
+  });
+
+  // =================================================================
+  // 📱 4. НАДЕЖНАЯ АВТОНОМНАЯ МАСКА ДЛЯ ПОЛЯ ВВОДА ТЕЛЕФОНА
+  // =================================================================
+  const phoneInput = document.getElementById('phone-input');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function () {
+      let matrix = "+7 (___) ___-__-__",
+        i = 0,
+        def = matrix.replace(/\D/g, ""),
+        val = this.value.replace(/\D/g, "");
+      if (def.length >= val.length) val = def;
+      this.value = matrix.replace(/./g, function (a) {
+        return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
+      });
+    });
+    phoneInput.addEventListener('blur', function () {
+      if (this.value.length < 18) this.value = "";
+    });
+  }
+
+  function scrollToTopAndOpenCalendar() {
+    const display = document.getElementById('quiz-selected-date');
+    if (display && display.classList.contains('quiz-date-red')) {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      setTimeout(() => {
+        if (calendarBox) calendarBox.classList.add('open');
+      }, 500);
+    }
+  }
+
+  // =================================================================
+  // 🚀 5. УЛЬТРА-СТАБИЛЬНАЯ ОТПРАВКА ДАННЫХ ЗАЯВКИ БЕЗ VPN В FIREBASE
+  // =================================================================
+  const quizForm = document.getElementById('quiz-form');
+  if (quizForm) {
+    quizForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name-input').value; // Считываем имя
+      const space = document.getElementById('space').value;
+      const phone = document.getElementById('phone-input').value;
+
+      const dateZamer = document.getElementById('quiz-selected-date').textContent;
+      const services = document.getElementById('quiz-selected-services').textContent;
+
+      // 🧠 БРОНИРОВАННЫЙ СБОР ФОРМАТА РЕМОНТА
+      const houseTypeSelect = document.getElementById('house-type');
+      let houseType = "Не указано";
+      if (houseTypeSelect && houseTypeSelect.selectedIndex !== -1) {
+        houseType = houseTypeSelect.options[houseTypeSelect.selectedIndex].text;
+        if (houseTypeSelect.value === 'partial') {
+          const partialSelect = document.getElementById('partial-service');
+          if (partialSelect && partialSelect.selectedIndex !== -1) {
+            const partialWorkName = partialSelect.options[partialSelect.selectedIndex].text;
+            houseType = houseType + " (" + partialWorkName + ")";
+          }
+        }
+      }
+
+      // 🧠 БРОНИРОВАННЫЙ СБОР СТИЛЯ ИНТЕРЬЕРА (ЗАЩИТА ОТ КРАША ДАТЧИКА OPTIONS)
+      const styleSelect = document.getElementById('style');
+      let style = "Не указан";
+      if (styleSelect && styleSelect.selectedIndex !== -1) {
+        style = styleSelect.options[styleSelect.selectedIndex].text;
+      }
+
+      // Если клиент пытается отправить квиз без выбора зеленой даты — принудительно скроллим к шапке
+      if (document.getElementById('quiz-selected-date').classList.contains('quiz-date-red')) {
+        alert('Пожалуйста, выберите свободную зелёную дату замера в шапке сайта!');
+        scrollToTopAndOpenCalendar();
+        return;
+      }
+
+      const cleanPhoneForCRM = phone.replace(/\D/g, "");
+      if (cleanPhoneForCRM) {
+        const nowTime = new Date();
+        const dayStr = String(nowTime.getDate()).padStart(2, '0');
+        const monthStr = String(nowTime.getMonth() + 1).padStart(2, '0');
+        const yearStr = String(nowTime.getFullYear()).slice(-2);
+        const dateKey = dayStr + monthStr + yearStr;
+
+        const timeKey = String(nowTime.getHours()).padStart(2, '0') +
+          String(nowTime.getMinutes()).padStart(2, '0') +
+          String(nowTime.getSeconds()).padStart(2, '0');
+
+        const uniqueCRMKey = cleanPhoneForCRM + "_" + dateKey + "_" + timeKey;
+
+        const leadData = {
+          name: name,
+          space: space,
+          houseType: houseType,
+          style: style,
+          date: dateZamer,
+          services: services,
+          phone: phone,
+          timestamp: nowTime.toISOString()
+        };
+
+        Promise.all([
+          fetch(FIREBASE_ROOT_URL + "/crm_clients/" + uniqueCRMKey + ".json", {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(leadData)
+          }),
+          fetch(FIREBASE_ROOT_URL + "/messages_queue/" + uniqueCRMKey + ".json", {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(leadData)
+          })
+        ])
+          .then(() => {
+            alert('Ваша заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+            quizForm.reset();
+
+            if (zamerBtn) zamerBtn.classList.remove('btn-green-active');
+            if (projectBtn) projectBtn.classList.remove('btn-green-active');
+            if (visualBtn) visualBtn.classList.remove('btn-green-active');
+
+            document.getElementById('quiz-selected-date').textContent = 'Не выбрана (выберите в шапке сайта)';
+            document.getElementById('quiz-selected-date').className = 'quiz-date-red';
+            document.getElementById('quiz-selected-date').parentElement.parentElement.style.borderColor = '#e2e8f0';
+            document.getElementById('quiz-selected-services').textContent = 'Только ремонт под ключ';
+            document.getElementById('quiz-selected-services').style.color = '#0f172a';
+
+            const partialWrapper = document.getElementById('partial-services-wrapper');
+            if (partialWrapper) partialWrapper.style.display = 'none'; // Гасим дочерний блок при очистке
+          })
+          .catch(err => {
+            alert('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.');
+            console.error("Ошибка Firebase:", err);
+          });
+      }
+    });
+  }
+
+  // =================================================================
+  // 📊 6. СКРЫТЫЙ СЧЁТЧИК ПОСЕТИТЕЛЕЙ (АКТУАЛЬНЫЙ СРЕЗ ПЛАТФОРМ НА 2026г)
+  // =================================================================
+  function trackInvisibleVisitor() {
+    try {
+      let visitorID = localStorage.getItem('inwall_visitor_id');
+      let isUnique = false;
+      if (!visitorID) {
+        visitorID = 'user_' + Math.random().toString(36).substring(2, 11) + '_' + Date.now();
+        localStorage.setItem('inwall_visitor_id', visitorID);
+        isUnique = true;
+      }
+      const ua = navigator.userAgent;
+      let deviceType = 'Другая платформа';
+      if (/iPhone/i.test(ua)) deviceType = 'iPhone';
+      else if (/iPad/i.test(ua)) deviceType = 'iPad';
+      else if (/Android/i.test(ua)) deviceType = 'Android';
+      else if (/Windows NT/i.test(ua)) deviceType = 'Windows PC';
+      else if (/Macintosh/i.test(ua) && !('ontouchend' in document)) deviceType = 'MacBook/iMac';
+      else if (/Linux/i.test(ua)) deviceType = 'Linux PC';
+
+      const isMobile = /iPhone|iPad|Android/i.test(ua);
+      const logData = {
+        device: deviceType,
+        isMobileDevice: isMobile,
+        isUniqueVisitor: isUnique,
+        url: window.location.href,
+        timestamp: new Date().toISOString()
+      };
+      const visitKey = 'visit_' + Date.now();
+      fetch(FIREBASE_ROOT_URL + "/analytics_visits/" + visitKey + ".json", {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(logData)
+      });
+    } catch (e) {
+    }
+  }
+
+    // 🧠 АСИНХРОННЫЙСТАРТ: Сначала мгновенно грузим дизайн и картинки, календарь — через 300мс!
+  window.addEventListener('load', () => {
+    trackInvisibleVisitor();
+    setTimeout(syncAndRenderCalendar, 300);
+  });
+
+  // Вечное фоновое обновление календаря без зависания интерфейса
+  setInterval(syncAndRenderCalendar, 20000);
+
+</script>
+
+<!-- 🌐 КОРПОРАТИВНЫЙ ФУТЕР С КЛИКАБЕЛЬНОЙ ПОЧТОЙ IN-WALL -->
+
+<!-- ⚖️ МОДАЛЬНОЕ ОКНО ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ -->
+<div id="policy-modal"
+     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.8); z-index: 99999; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px);">
+  <div
+    style="background-color: #ffffff; width: 100%; max-width: 600px; max-height: 80vh; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);">
+    <!-- Шапка окна -->
+    <div
+      style="padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background-color: #f8fafc;">
+      <h3 style="margin: 0; color: #0f172a; font-size: 16px; font-weight: 700;">Политика конфиденциальности</h3>
+      <button onclick="closePolicyModal()"
+              style="background: none; border: none; color: #64748b; font-size: 24px; cursor: pointer; line-height: 1; padding: 0 5px;">
+        &times;
+      </button>
+    </div>
+    <!-- Текст политики -->
+    <div style="padding: 20px; overflow-y: auto; color: #334155; font-size: 13px; line-height: 1.6; text-align: left;">
+      <p><b>1. Общие положения</b><br>Настоящая политика обработки персональных данных составлена в соответствии с
+        требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки
+        персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые администрацией сайта
+        <b>inwall-remont.vercel.app</b> (далее — Оператор).</p>
+      <p><b>2. Оператор обрабатывает следующие персональные данные:</b><br>— Имя посетителя сайта;<br>— Номер телефона
+        посетителя сайта.</p>
+      <p><b>3. Цели обработки персональных данных</b><br>Цель обработки персональных данных Пользователя —
+        информирование Пользователя посредством отправки СМС, сообщений в мессенджерах или телефонных звонков; уточнение
+        деталей заявки; назначение даты и времени бесплатного замера объекта.</p>
+      <p><b>4. Основания для обработки</b><br>Оператор обрабатывает персональные данные Пользователя только в случае их
+        заполнения и/или отправки Пользователем самостоятельно через специальные формы на сайте. Отправляя форму,
+        Пользователь выражает свое согласие с данной Политикой.</p>
+      <p><b>5. Порядок сбора, хранения, передачи и других видов обработки</b><br>Безопасность персональных данных,
+        обрабатываемых Оператором, обеспечивается путем реализации правовых, организационных и технических мер,
+        необходимых для выполнения в полном объеме требований действующего законодательства в области защиты
+        персональных данных. Данные не передаются третьим лицам.</p>
+      <p><b>6. Заключительные положения</b><br>Пользователь может получить любые разъяснения по интересующим вопросам,
+        касающимся обработки его персональных данных, обратившись к Оператору по электронной почте организации.</p>
+    </div>
+    <!-- Подвал окна -->
+    <div style="padding: 15px 20px; border-top: 1px solid #e2e8f0; text-align: right; background-color: #f8fafc;">
+      <button onclick="closePolicyModal()"
+              style="background-color: #10b981; color: #ffffff; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px; transition: background-color 0.2s;"
+              onmouseenter="this.style.backgroundColor='#059669'" onmouseleave="this.style.backgroundColor='#10b981'">
+        Понятно
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer
+  style="background-color: #0f172a; padding: 30px 15px; border-top: 1px solid rgba(226, 232, 240, 0.05); text-align: center; margin-top: 50px;">
+  <div
+    style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+
+    <p style="color: #94a3b8; font-size: 13px; margin: 0; letter-spacing: 0.5px;">
+      &copy; 2026 ИНВОЛ.Ремонт и дизайн. Все права защищены. |
+      <a href="javascript:void(0);" onclick="openPolicyModal()"
+         style="color: #94a3b8; text-decoration: underline; transition: color 0.2s;"
+         onmouseenter="this.style.color='#10b981'" onmouseleave="this.style.color='#94a3b8'">Политика
+        конфиденциальности</a>
+    </p>
+
+    <p style="color: #cbd5e1; font-size: 14px; margin: 0;">
+      По вопросам сотрудничества и предложений:
+      <a href="mailto:inwall.remont@gmail.com"
+         style="color: #10b981; font-weight: 700; text-decoration: none; border-bottom: 1px dashed #10b981; transition: color 0.2s;"
+         onmouseenter="this.style.color='#34d399'" onmouseleave="this.style.color='#10b981'">написать нам</a>
+    </p>
+  </div>
+</footer>
+</body>
+</html>
